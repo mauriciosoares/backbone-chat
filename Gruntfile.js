@@ -17,8 +17,8 @@ module.exports = function(grunt) {
       'public/components/jquery/dist/jquery.js',
       'public/components/underscore/underscore.js',
       'public/components/backbone/backbone.js',
-      'public/js/boot.js',
-      'public/js/**/**.js'
+      'public/js/chat/boot.js',
+      'public/js/chat/**/**.js'
     ],
     dest: 'public/js/chat.dev.js'
   };
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 
   config.jshint.dev = {
     files: {
-      src: ['public/js/**/**.js']
+      src: ['public/js/chat/**/**.js']
     }
   };
 
