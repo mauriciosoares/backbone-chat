@@ -16,7 +16,9 @@ module.exports = function(grunt) {
     src: [
       'public/components/jquery/dist/jquery.js',
       'public/components/underscore/underscore.js',
-      'public/components/backbone/backbone.js'
+      'public/components/backbone/backbone.js',
+      'public/js/boot.js',
+      'public/js/**/**.js'
     ],
     dest: 'public/js/chat.dev.js'
   };
