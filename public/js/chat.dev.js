@@ -12070,6 +12070,7 @@ Application.Collections = {};
 Application.Views = {};
 Application.Helpers = {};
 
+// helper for defining templates on views
 Application.Helpers.template = function(selector) {
   return _.template($(selector).html());
 };
@@ -12078,9 +12079,12 @@ Application.Helpers.template = function(selector) {
 $(function() {
   new Application.Views.App();
 });
+
 Application.Views = Application.Views || {};
 
 (function() {
+  'use strict';
+
   Application.Views.App = Backbone.View.extend({
     el: '#chat'
   });

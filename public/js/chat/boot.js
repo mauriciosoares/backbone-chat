@@ -5,6 +5,7 @@ Application.Collections = {};
 Application.Views = {};
 Application.Helpers = {};
 
+// helper for defining templates on views
 Application.Helpers.template = function(selector) {
   return _.template($(selector).html());
 };
