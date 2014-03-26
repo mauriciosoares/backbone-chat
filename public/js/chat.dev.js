@@ -12062,3 +12062,5 @@ return jQuery;
   return Backbone;
 
 }));
+
+console.log('yeah');

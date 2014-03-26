@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 
   var tasks = [
     'grunt-contrib-concat',
-    'grunt-contrib-jshint'
+    'grunt-contrib-jshint',
+    'grunt-contrib-watch'
   ];
 
   var config = {};
@@ -30,6 +31,18 @@ module.exports = function(grunt) {
   config.jshint.dev = {
     files: {
       src: ['public/js/chat/**/**.js']
+    }
+  };
+
+  //======================================================
+  // Watch Task
+  config.watch = {
+    scripts: {
+      files: ['public/js/chat/**/**.js'],
+      tasks: ['default'],
+      options: {
+        spawn: false
+      }
     }
   };
 
