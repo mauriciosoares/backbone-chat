@@ -1,0 +1,30 @@
+{
+  "name": "backbone-chat",
+  "version": "0.0.1",
+  "homepage": "https://github.com/msodeveloper/backbone-chat",
+  "authors": [
+    "Mauricio Soares <m.soares2603@gmail.com>"
+  ],
+  "description": "A simple chat written with nodeJS and backbone",
+  "main": "app.js",
+  "keywords": [
+    "backbone",
+    "socket.io",
+    "nodejs"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.0",
+    "underscore": "~1.6.0"
+  }
+}
