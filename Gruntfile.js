@@ -2,7 +2,8 @@ module.exports = function(grunt) {
   'use strict';
 
   var tasks = [
-    'grunt-contrib-concat'
+    'grunt-contrib-concat',
+    'grunt-contrib-jshint'
   ];
 
   var config = {};
@@ -20,8 +21,20 @@ module.exports = function(grunt) {
     dest: 'public/js/chat.dev.js'
   };
 
+  //======================================================
+  // JSHint Task
+  config.jshint = {};
+
+  config.jshint.dev = {
+    files: {
+      src: ['public/js/**/**.js']
+    }
+  };
+
+  //======================================================
+  // Grunt configuration
   grunt.initConfig(config);
   tasks.forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['concat:dev']);
+  grunt.registerTask('default', ['jshint:dev', 'concat:dev']);
 };
