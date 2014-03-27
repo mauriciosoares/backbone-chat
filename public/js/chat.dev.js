@@ -12076,6 +12076,10 @@ Application.Helpers.template = function(selector) {
   return _.template($(selector).html());
 };
 
+_.templateSettings = {
+    interpolate : /\{\{(.+?)\}\}/g
+};
+
 // kicks things off
 $(function() {
   new Application.Views.App();
@@ -12197,15 +12201,11 @@ Application.Views = Application.Views || {};
     initialize: function() {
       // starts socket.io listeners and stuff
       this.socketIo = new Application.Utils.socketIo();
-      this.socketIo.on('newMessage', this.onNewMessage);
+      this.socketIo.on('newMessage', this.addOne);
     },
 
-    onNewMessage: function(event, data) {
-      console.log(data);
-    },
-
-    addOne: function(text) {
-      new Application.Views.Message({text: text}).render();
+    addOne: function(event, data) {
+      new Application.Views.Message(data).render();
     }
   });
 } ());

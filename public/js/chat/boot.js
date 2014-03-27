@@ -11,6 +11,10 @@ Application.Helpers.template = function(selector) {
   return _.template($(selector).html());
 };
 
+_.templateSettings = {
+    interpolate : /\{\{(.+?)\}\}/g
+};
+
 // kicks things off
 $(function() {
   new Application.Views.App();
