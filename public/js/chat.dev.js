@@ -12084,10 +12084,17 @@ Application.Collections = Application.Collections || {};
 
 (function() {
   var Messages = Backbone.Collections.extend({
-
+    model: Application.Models.Message
   });
 
   Application.Collections = new Messages();
+} ());
+Application.Models = Application.Models || {};
+
+(function() {
+  Application.Models.Message = Backbone.Models.extend({
+
+  });
 } ());
 Application.Views = Application.Views || {};
 
