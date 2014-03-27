@@ -12183,12 +12183,22 @@ Application.Views = Application.Views || {};
 
 (function() {
   Application.Views.Message = Backbone.View.extend({
+    tagName: 'div',
+
+    template: Application.Helpers.template('#message-template'),
+
     initialize: function(props) {
       this.text = props.text;
     },
 
     render: function() {
-      console.log(this.text);
+      var html = this.template({
+        text: this.text
+      });
+
+      this.$el.append(html);
+
+      return this;
     }
   });
 } ());
@@ -12201,11 +12211,12 @@ Application.Views = Application.Views || {};
     initialize: function() {
       // starts socket.io listeners and stuff
       this.socketIo = new Application.Utils.socketIo();
-      this.socketIo.on('newMessage', this.addOne);
+      this.socketIo.on('newMessage', this.addOne.bind(this));
     },
 
     addOne: function(event, data) {
-      new Application.Views.Message(data).render();
+      var newMessage = new Application.Views.Message(data).render();
+      this.$el.append(newMessage.el);
     }
   });
 } ());

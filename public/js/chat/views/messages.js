@@ -7,11 +7,12 @@ Application.Views = Application.Views || {};
     initialize: function() {
       // starts socket.io listeners and stuff
       this.socketIo = new Application.Utils.socketIo();
-      this.socketIo.on('newMessage', this.addOne);
+      this.socketIo.on('newMessage', this.addOne.bind(this));
     },
 
     addOne: function(event, data) {
-      new Application.Views.Message(data).render();
+      var newMessage = new Application.Views.Message(data).render();
+      this.$el.append(newMessage.el);
     }
   });
 } ());
