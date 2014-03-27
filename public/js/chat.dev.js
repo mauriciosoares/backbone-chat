@@ -12086,6 +12086,43 @@ Application.Views = Application.Views || {};
   'use strict';
 
   Application.Views.App = Backbone.View.extend({
-    el: '#chat'
+    el: '#chat',
+
+    initialize: function() {
+      // starts input for sending messages
+      new Application.Views.ChatInput();
+    }
+  });
+} ());
+
+Application.Views = Application.Views || {};
+
+(function() {
+  var ENTER_KEY = 13;
+  Application.Views.ChatInput = Backbone.View.extend({
+    el: '#chat-input',
+
+    events: {
+      'keyup': 'sendMessage'
+    },
+
+    initialize: function() {
+      var chatMessages = new Application.Views.ChatMessages();
+    },
+
+    sendMessage: function(event) {
+      if(event.which !== ENTER_KEY) {
+        return;
+      }
+
+    }
+  });
+} ());
+
+Application.Views = Application.Views || {};
+
+(function() {
+  Application.Views.ChatMessages = Backbone.View.extend({
+    el: '#chat-messages'
   });
 } ());

@@ -4,6 +4,11 @@ Application.Views = Application.Views || {};
   'use strict';
 
   Application.Views.App = Backbone.View.extend({
-    el: '#chat'
+    el: '#chat',
+
+    initialize: function() {
+      // starts input for sending messages
+      new Application.Views.ChatInput();
+    }
   });
 } ());
