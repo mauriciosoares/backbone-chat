@@ -12132,6 +12132,7 @@ Application.Views = Application.Views || {};
       }
 
       var text = $.trim(event.target.value);
+      event.target.value = '';
 
       if(!text) {
         return;
