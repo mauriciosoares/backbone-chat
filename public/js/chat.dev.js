@@ -12080,6 +12080,15 @@ $(function() {
   new Application.Views.App();
 });
 
+Application.Collections = Application.Collections || {};
+
+(function() {
+  var Messages = Backbone.Collections.extend({
+
+  });
+
+  Application.Collections = new Messages();
+} ());
 Application.Views = Application.Views || {};
 
 (function() {
