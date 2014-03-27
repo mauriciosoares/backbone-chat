@@ -12083,7 +12083,7 @@ $(function() {
 Application.Collections = Application.Collections || {};
 
 (function() {
-  var Messages = Backbone.Collections.extend({
+  var Messages = Backbone.Collection.extend({
     model: Application.Models.Message
   });
 
@@ -12092,7 +12092,7 @@ Application.Collections = Application.Collections || {};
 Application.Models = Application.Models || {};
 
 (function() {
-  Application.Models.Message = Backbone.Models.extend({
+  Application.Models.Message = Backbone.Model.extend({
 
   });
 } ());

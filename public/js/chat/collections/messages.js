@@ -1,7 +1,7 @@
 Application.Collections = Application.Collections || {};
 
 (function() {
-  var Messages = Backbone.Collections.extend({
+  var Messages = Backbone.Collection.extend({
     model: Application.Models.Message
   });
 
