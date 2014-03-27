@@ -1,7 +1,10 @@
 Application.Views = Application.Views || {};
 
 (function() {
+  'use strict';
+
   var ENTER_KEY = 13;
+
   Application.Views.ChatInput = Backbone.View.extend({
     el: '#chat-input',
 

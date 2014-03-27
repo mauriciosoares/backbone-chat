@@ -12088,6 +12088,8 @@ $(function() {
 Application.Collections = Application.Collections || {};
 
 (function() {
+  'use strict';
+
   var Messages = Backbone.Collection.extend({
     model: Application.Models.Message
   });
@@ -12097,6 +12099,8 @@ Application.Collections = Application.Collections || {};
 Application.Models = Application.Models || {};
 
 (function() {
+  'use strict';
+
   Application.Models.Message = Backbone.Model.extend({
 
   });
@@ -12104,6 +12108,8 @@ Application.Models = Application.Models || {};
 Application.Utils = Application.Utils || {};
 
 (function() {
+  'use strict';
+
   var URL = location.protocol + '//' + location.hostname + ':' + location.port;
 
   Application.Utils.socketIo = function() {
@@ -12148,7 +12154,10 @@ Application.Views = Application.Views || {};
 Application.Views = Application.Views || {};
 
 (function() {
+  'use strict';
+
   var ENTER_KEY = 13;
+
   Application.Views.ChatInput = Backbone.View.extend({
     el: '#chat-input',
 
@@ -12182,6 +12191,8 @@ Application.Views = Application.Views || {};
 Application.Views = Application.Views || {};
 
 (function() {
+  'use strict';
+
   Application.Views.Message = Backbone.View.extend({
     tagName: 'div',
 
@@ -12205,8 +12216,12 @@ Application.Views = Application.Views || {};
 Application.Views = Application.Views || {};
 
 (function() {
+  'use strict';
+
   Application.Views.Messages = Backbone.View.extend({
     el: '#chat-messages',
+
+    collection: Application.Collections.Messages,
 
     initialize: function() {
       // starts socket.io listeners and stuff
@@ -12215,6 +12230,11 @@ Application.Views = Application.Views || {};
     },
 
     addOne: function(event, data) {
+
+      // this.collection.add({
+      //   text: data.text
+      // });
+
       var newMessage = new Application.Views.Message(data).render();
       this.$el.append(newMessage.el);
     }

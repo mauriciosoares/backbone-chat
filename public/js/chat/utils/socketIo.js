@@ -1,6 +1,8 @@
 Application.Utils = Application.Utils || {};
 
 (function() {
+  'use strict';
+
   var URL = location.protocol + '//' + location.hostname + ':' + location.port;
 
   Application.Utils.socketIo = function() {

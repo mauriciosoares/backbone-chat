@@ -1,6 +1,8 @@
 Application.Views = Application.Views || {};
 
 (function() {
+  'use strict';
+
   Application.Views.Message = Backbone.View.extend({
     tagName: 'div',
 
