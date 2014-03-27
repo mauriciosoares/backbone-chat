@@ -4,6 +4,7 @@ Application.Models = {};
 Application.Collections = {};
 Application.Views = {};
 Application.Helpers = {};
+Application.Utils = {};
 
 // helper for defining templates on views
 Application.Helpers.template = function(selector) {

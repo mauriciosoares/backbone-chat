@@ -9,6 +9,9 @@ Application.Views = Application.Views || {};
     initialize: function() {
       // starts input for sending messages
       new Application.Views.ChatInput();
+
+      // starts socket.io listeners and stuff
+      new Application.Utils.socketIo();
     }
   });
 } ());

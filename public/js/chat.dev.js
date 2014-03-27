@@ -12069,6 +12069,7 @@ Application.Models = {};
 Application.Collections = {};
 Application.Views = {};
 Application.Helpers = {};
+Application.Utils = {};
 
 // helper for defining templates on views
 Application.Helpers.template = function(selector) {
@@ -12096,6 +12097,17 @@ Application.Models = Application.Models || {};
 
   });
 } ());
+Application.Utils = Application.Utils || {};
+
+(function() {
+  Application.Utils.socketIo = function() {
+    this.initialize();
+  };
+
+  Application.Utils.socketIo.prototype.initialize = function() {
+
+  };
+} ());
 Application.Views = Application.Views || {};
 
 (function() {
@@ -12107,6 +12119,9 @@ Application.Views = Application.Views || {};
     initialize: function() {
       // starts input for sending messages
       new Application.Views.ChatInput();
+
+      // starts socket.io listeners and stuff
+      new Application.Utils.socketIo();
     }
   });
 } ());
