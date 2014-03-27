@@ -12094,7 +12094,7 @@ Application.Collections = Application.Collections || {};
     model: Application.Models.Message
   });
 
-  Application.Collections.Messages = new Messages();
+  Application.Collections.messages = new Messages();
 } ());
 Application.Models = Application.Models || {};
 
@@ -12221,7 +12221,7 @@ Application.Views = Application.Views || {};
   Application.Views.Messages = Backbone.View.extend({
     el: '#chat-messages',
 
-    collection: Application.Collections.Messages,
+    collection: Application.Collections.messages,
 
     initialize: function() {
       // starts socket.io listeners and stuff
@@ -12231,9 +12231,9 @@ Application.Views = Application.Views || {};
 
     addOne: function(event, data) {
 
-      // this.collection.add({
-      //   text: data.text
-      // });
+      this.collection.add({
+        text: data.text
+      });
 
       var newMessage = new Application.Views.Message(data).render();
       this.$el.append(newMessage.el);

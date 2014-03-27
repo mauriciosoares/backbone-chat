@@ -7,5 +7,5 @@ Application.Collections = Application.Collections || {};
     model: Application.Models.Message
   });
 
-  Application.Collections.Messages = new Messages();
+  Application.Collections.messages = new Messages();
 } ());
