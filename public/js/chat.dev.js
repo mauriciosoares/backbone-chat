@@ -12107,7 +12107,7 @@ Application.Views = Application.Views || {};
     },
 
     initialize: function() {
-      var chatMessages = new Application.Views.ChatMessages();
+      var chatMessages = new Application.Views.Messages();
     },
 
     sendMessage: function(event) {
@@ -12122,7 +12122,7 @@ Application.Views = Application.Views || {};
 Application.Views = Application.Views || {};
 
 (function() {
-  Application.Views.ChatMessages = Backbone.View.extend({
+  Application.Views.Messages = Backbone.View.extend({
     el: '#chat-messages'
   });
 } ());

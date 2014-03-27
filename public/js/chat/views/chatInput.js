@@ -10,7 +10,7 @@ Application.Views = Application.Views || {};
     },
 
     initialize: function() {
-      var chatMessages = new Application.Views.ChatMessages();
+      var chatMessages = new Application.Views.Messages();
     },
 
     sendMessage: function(event) {
