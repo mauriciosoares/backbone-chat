@@ -25,7 +25,7 @@ Application.Views = Application.Views || {};
         return;
       }
 
-      this.socketIo.emit('newMessage', {
+      this.socketIo.socket.emit('newMessage', {
         text: text
       });
     }

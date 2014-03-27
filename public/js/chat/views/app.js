@@ -9,6 +9,9 @@ Application.Views = Application.Views || {};
     initialize: function() {
       // starts input for sending messages
       new Application.Views.ChatInput();
+
+      // starts messages functionalities
+      new Application.Views.Messages();
     }
   });
 } ());

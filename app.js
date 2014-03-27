@@ -14,4 +14,10 @@ app.get('/', function(req, res) {
   res.render('index.ejs');
 });
 
+io.on('connection', function(socket) {
+  socket.on('newMessage', function(data) {
+    io.sockets.emit('incomingMessage', data);
+  });
+});
+
 server.listen(3333);
