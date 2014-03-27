@@ -10,7 +10,7 @@ Application.Views = Application.Views || {};
     },
 
     initialize: function() {
-      this.chatMessages = new Application.Views.Messages();
+      this.socketIo = new Application.Utils.socketIo();
     },
 
     sendMessage: function(event) {
@@ -25,7 +25,9 @@ Application.Views = Application.Views || {};
         return;
       }
 
-      this.chatMessages.addOne(text);
+      this.socketIo.emit('newMessage', {
+        text: text
+      });
     }
   });
 } ());

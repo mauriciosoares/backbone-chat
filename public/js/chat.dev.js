@@ -12100,12 +12100,27 @@ Application.Models = Application.Models || {};
 Application.Utils = Application.Utils || {};
 
 (function() {
+  var URL = location.protocol + '//' + location.hostname + ':' + location.port;
+
   Application.Utils.socketIo = function() {
     this.initialize();
   };
 
   Application.Utils.socketIo.prototype.initialize = function() {
+    this.socket = io.connect(URL);
 
+    this.emitter = $({});
+    this.on = $.proxy(this.emitter, 'on');
+
+    this.addSocketListeners();
+  };
+
+  Application.Utils.socketIo.prototype.addSocketListeners = function() {
+    this.socket.on('incomingMessage', $.proxy(this, 'onSocketMessage'));
+  };
+
+  Application.Utils.socketIo.prototype.onSocketMessage = function(data) {
+    this.emitter.trigger('newMessage', data);
   };
 } ());
 Application.Views = Application.Views || {};
@@ -12119,9 +12134,6 @@ Application.Views = Application.Views || {};
     initialize: function() {
       // starts input for sending messages
       new Application.Views.ChatInput();
-
-      // starts socket.io listeners and stuff
-      new Application.Utils.socketIo();
     }
   });
 } ());
@@ -12138,7 +12150,7 @@ Application.Views = Application.Views || {};
     },
 
     initialize: function() {
-      this.chatMessages = new Application.Views.Messages();
+      this.socketIo = new Application.Utils.socketIo();
     },
 
     sendMessage: function(event) {
@@ -12153,7 +12165,9 @@ Application.Views = Application.Views || {};
         return;
       }
 
-      this.chatMessages.addOne(text);
+      this.socketIo.emit('newMessage', {
+        text: text
+      });
     }
   });
 } ());
@@ -12176,6 +12190,16 @@ Application.Views = Application.Views || {};
 (function() {
   Application.Views.Messages = Backbone.View.extend({
     el: '#chat-messages',
+
+    initialize: function() {
+      // starts socket.io listeners and stuff
+      this.socketIo = new Application.Utils.socketIo();
+      this.socketIo.on('newMessage', this.onNewMessage);
+    },
+
+    onNewMessage: function(event, data) {
+      console.log(data);
+    },
 
     addOne: function(text) {
       new Application.Views.Message({text: text}).render();
