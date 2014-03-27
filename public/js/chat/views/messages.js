@@ -12,19 +12,19 @@ Application.Views = Application.Views || {};
       // starts socket.io listeners and stuff
       this.socketIo = new Application.Utils.socketIo();
       this.socketIo.on('newMessage', this.addMessage.bind(this));
-
-      this.collection.on('add', this.addOne, this);
     },
 
     addMessage: function(event, data) {
       this.collection.add({
         text: data.text
       });
+
+      this.addOne(this.collection.models[this.collection.models.length - 1]);
     },
 
-    addOne: function() {
+    addOne: function(model) {
       var newMessage = new Application.Views.Message({
-        model: this.collection.models[this.collection.models.length - 1]
+        model: model
       }).render();
 
       this.$el.append(newMessage.el);
