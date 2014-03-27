@@ -12085,6 +12085,15 @@ $(function() {
   new Application.Views.App();
 });
 
+Application.Models = Application.Models || {};
+
+(function() {
+  'use strict';
+
+  Application.Models.Message = Backbone.Model.extend({
+
+  });
+} ());
 Application.Collections = Application.Collections || {};
 
 (function() {
@@ -12095,43 +12104,6 @@ Application.Collections = Application.Collections || {};
   });
 
   Application.Collections.messages = new Messages();
-} ());
-Application.Models = Application.Models || {};
-
-(function() {
-  'use strict';
-
-  Application.Models.Message = Backbone.Model.extend({
-
-  });
-} ());
-Application.Utils = Application.Utils || {};
-
-(function() {
-  'use strict';
-
-  var URL = location.protocol + '//' + location.hostname + ':' + location.port;
-
-  Application.Utils.socketIo = function() {
-    this.initialize();
-  };
-
-  Application.Utils.socketIo.prototype.initialize = function() {
-    this.socket = io.connect(URL);
-
-    this.emitter = $({});
-    this.on = $.proxy(this.emitter, 'on');
-
-    this.addSocketListeners();
-  };
-
-  Application.Utils.socketIo.prototype.addSocketListeners = function() {
-    this.socket.on('incomingMessage', $.proxy(this, 'onSocketMessage'));
-  };
-
-  Application.Utils.socketIo.prototype.onSocketMessage = function(data) {
-    this.emitter.trigger('newMessage', data);
-  };
 } ());
 Application.Views = Application.Views || {};
 
@@ -12198,13 +12170,13 @@ Application.Views = Application.Views || {};
 
     template: Application.Helpers.template('#message-template'),
 
-    initialize: function(props) {
-      this.text = props.text;
+    initialize: function() {
+
     },
 
     render: function() {
       var html = this.template({
-        text: this.text
+        text: this.model.get('text')
       });
 
       this.$el.append(html);
@@ -12235,8 +12207,40 @@ Application.Views = Application.Views || {};
         text: data.text
       });
 
-      var newMessage = new Application.Views.Message(data).render();
+      var newMessage = new Application.Views.Message({
+        model: this.collection.models[this.collection.models.length - 1]
+      }).render();
+
       this.$el.append(newMessage.el);
     }
   });
+} ());
+
+Application.Utils = Application.Utils || {};
+
+(function() {
+  'use strict';
+
+  var URL = location.protocol + '//' + location.hostname + ':' + location.port;
+
+  Application.Utils.socketIo = function() {
+    this.initialize();
+  };
+
+  Application.Utils.socketIo.prototype.initialize = function() {
+    this.socket = io.connect(URL);
+
+    this.emitter = $({});
+    this.on = $.proxy(this.emitter, 'on');
+
+    this.addSocketListeners();
+  };
+
+  Application.Utils.socketIo.prototype.addSocketListeners = function() {
+    this.socket.on('incomingMessage', $.proxy(this, 'onSocketMessage'));
+  };
+
+  Application.Utils.socketIo.prototype.onSocketMessage = function(data) {
+    this.emitter.trigger('newMessage', data);
+  };
 } ());

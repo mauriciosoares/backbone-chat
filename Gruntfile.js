@@ -19,7 +19,11 @@ module.exports = function(grunt) {
       'public/components/underscore/underscore.js',
       'public/components/backbone/backbone.js',
       'public/js/chat/boot.js',
-      'public/js/chat/**/**.js'
+      'public/js/models/**.js',
+      'public/js/chat/models/**.js',
+      'public/js/chat/collections/**.js',
+      'public/js/chat/views/**.js',
+      'public/js/chat/utils/**.js'
     ],
     dest: 'public/js/chat.dev.js'
   };

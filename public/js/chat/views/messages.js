@@ -20,7 +20,10 @@ Application.Views = Application.Views || {};
         text: data.text
       });
 
-      var newMessage = new Application.Views.Message(data).render();
+      var newMessage = new Application.Views.Message({
+        model: this.collection.models[this.collection.models.length - 1]
+      }).render();
+
       this.$el.append(newMessage.el);
     }
   });

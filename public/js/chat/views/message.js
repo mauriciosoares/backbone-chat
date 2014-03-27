@@ -8,13 +8,13 @@ Application.Views = Application.Views || {};
 
     template: Application.Helpers.template('#message-template'),
 
-    initialize: function(props) {
-      this.text = props.text;
+    initialize: function() {
+
     },
 
     render: function() {
       var html = this.template({
-        text: this.text
+        text: this.model.get('text')
       });
 
       this.$el.append(html);
