@@ -4,6 +4,8 @@ Application.Models = Application.Models || {};
   'use strict';
 
   Application.Models.Message = Backbone.Model.extend({
-
+    defaults: {
+      text: ''
+    }
   });
 } ());
