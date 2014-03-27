@@ -12123,7 +12123,7 @@ Application.Views = Application.Views || {};
     },
 
     initialize: function() {
-      var chatMessages = new Application.Views.Messages();
+      this.chatMessages = new Application.Views.Messages();
     },
 
     sendMessage: function(event) {
@@ -12131,6 +12131,13 @@ Application.Views = Application.Views || {};
         return;
       }
 
+      var text = $.trim(event.target.value);
+
+      if(!text) {
+        return;
+      }
+
+      this.chatMessages.addOne(text);
     }
   });
 } ());
@@ -12138,7 +12145,24 @@ Application.Views = Application.Views || {};
 Application.Views = Application.Views || {};
 
 (function() {
+  Application.Views.Message = Backbone.View.extend({
+    initialize: function(props) {
+      this.text = props.text;
+    },
+
+    render: function() {
+      console.log(this.text);
+    }
+  });
+} ());
+Application.Views = Application.Views || {};
+
+(function() {
   Application.Views.Messages = Backbone.View.extend({
-    el: '#chat-messages'
+    el: '#chat-messages',
+
+    addOne: function(text) {
+      new Application.Views.Message({text: text}).render();
+    }
   });
 } ());

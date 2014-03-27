@@ -10,7 +10,7 @@ Application.Views = Application.Views || {};
     },
 
     initialize: function() {
-      var chatMessages = new Application.Views.Messages();
+      this.chatMessages = new Application.Views.Messages();
     },
 
     sendMessage: function(event) {
@@ -18,6 +18,13 @@ Application.Views = Application.Views || {};
         return;
       }
 
+      var text = $.trim(event.target.value);
+
+      if(!text) {
+        return;
+      }
+
+      this.chatMessages.addOne(text);
     }
   });
 } ());

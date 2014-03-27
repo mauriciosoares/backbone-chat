@@ -1,6 +1,7 @@
 var express = require('express'),
   app = express(),
-  server = require('http').createServer(app);
+  server = require('http').createServer(app),
+  io = require('socket.io').listen(server);
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
