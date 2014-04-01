@@ -9,6 +9,9 @@ Application.Views = Application.Views || {};
     collection: Application.Collections.messages,
 
     initialize: function() {
+      // starts input for sending messages
+      new Application.Views.ChatInput();
+
       // starts socket.io listeners and stuff
       this.socketIo = new Application.Utils.socketIo();
       this.socketIo.on('newMessage', this.addMessage.bind(this));
