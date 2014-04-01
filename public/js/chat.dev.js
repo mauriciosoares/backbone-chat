@@ -12259,7 +12259,11 @@ Application.Views = Application.Views || {};
     },
 
     render: function() {
-      console.log(this.model);
+      var html = this.template(this.model);
+
+      this.$el.append(html);
+
+      return this;
     }
   });
 } ());
@@ -12279,11 +12283,14 @@ Application.Views = Application.Views || {};
     },
 
     render: function(event, data) {
+      this.$el.html('');
+
       _.forEach(data.users, function(user) {
         var newUser = new Application.Views.User({
           model: user
         }).render();
 
+        this.$el.append(newUser.el);
       }, this);
     }
   });

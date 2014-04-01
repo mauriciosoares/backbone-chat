@@ -13,11 +13,14 @@ Application.Views = Application.Views || {};
     },
 
     render: function(event, data) {
+      this.$el.html('');
+
       _.forEach(data.users, function(user) {
         var newUser = new Application.Views.User({
           model: user
         }).render();
 
+        this.$el.append(newUser.el);
       }, this);
     }
   });
