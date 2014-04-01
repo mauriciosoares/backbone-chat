@@ -7,7 +7,7 @@ Application.Views = Application.Views || {};
     el: '#chat',
 
     initialize: function() {
-      this.socketIo = new Application.Utils.socketIo();
+      this.socketIo = new Application.Utils.SocketIo();
       this.socketIo.on('refreshConnections', function(event, data) {
         console.log(data);
       });

@@ -5,11 +5,11 @@ Application.Utils = Application.Utils || {};
 
   var URL = location.protocol + '//' + location.hostname + ':' + location.port;
 
-  Application.Utils.socketIo = function() {
+  Application.Utils.SocketIo = function() {
     this.initialize();
   };
 
-  Application.Utils.socketIo.prototype.initialize = function() {
+  Application.Utils.SocketIo.prototype.initialize = function() {
     this.socket = io.connect(URL);
 
     this.emitter = $({});
@@ -18,7 +18,7 @@ Application.Utils = Application.Utils || {};
     this.addSocketListeners();
   };
 
-  Application.Utils.socketIo.prototype.addSocketListeners = function() {
+  Application.Utils.SocketIo.prototype.addSocketListeners = function() {
     this.socket.on('incomingMessage', $.proxy(this, 'onSocketMessage'));
 
     this.socket.on('connect', $.proxy(this, 'onSocketConnect'));
@@ -26,7 +26,7 @@ Application.Utils = Application.Utils || {};
     this.socket.on('refreshConnections', $.proxy(this, 'onSocketRefreshConnections'));
   };
 
-  Application.Utils.socketIo.prototype.onSocketConnect = function(data) {
+  Application.Utils.SocketIo.prototype.onSocketConnect = function(data) {
     this.sessionId = this.socket.socket.sessionid;
     console.log(this.sessionId);
 
@@ -35,11 +35,11 @@ Application.Utils = Application.Utils || {};
     });
   };
 
-  Application.Utils.socketIo.prototype.onSocketMessage = function(data) {
+  Application.Utils.SocketIo.prototype.onSocketMessage = function(data) {
     this.emitter.trigger('newMessage', data);
   };
 
-  Application.Utils.socketIo.prototype.onSocketRefreshConnections = function(data) {
+  Application.Utils.SocketIo.prototype.onSocketRefreshConnections = function(data) {
     this.emitter.trigger('refreshConnections', data);
   };
 } ());
