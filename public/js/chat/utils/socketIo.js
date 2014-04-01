@@ -30,6 +30,8 @@ Application.Utils = Application.Utils || {};
     this.socket.emit('newUser', {
       id: this.sessionId
     });
+
+    this.emitter.trigger('newUser', this.sessionId);
   };
 
   Application.Utils.socketIo.prototype.onSocketMessage = function(data) {

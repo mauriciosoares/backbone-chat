@@ -12117,6 +12117,9 @@ Application.Views = Application.Views || {};
 
     initialize: function() {
       this.socketIo = new Application.Utils.socketIo();
+      this.socketIo.on('newUser', function(event, data) {
+        console.log(data);
+      });
 
       // starts messages functionalities
       new Application.Views.Messages({
@@ -12259,6 +12262,8 @@ Application.Utils = Application.Utils || {};
     this.socket.emit('newUser', {
       id: this.sessionId
     });
+
+    this.emitter.trigger('newUser', this.sessionId);
   };
 
   Application.Utils.socketIo.prototype.onSocketMessage = function(data) {
