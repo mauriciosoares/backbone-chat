@@ -8,7 +8,7 @@ Application.Views = Application.Views || {};
 
     initialize: function() {
       this.socketIo = new Application.Utils.socketIo();
-      this.socketIo.on('newUser', function(event, data) {
+      this.socketIo.on('refreshConnections', function(event, data) {
         console.log(data);
       });
 

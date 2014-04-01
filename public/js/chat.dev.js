@@ -12117,7 +12117,7 @@ Application.Views = Application.Views || {};
 
     initialize: function() {
       this.socketIo = new Application.Utils.socketIo();
-      this.socketIo.on('newUser', function(event, data) {
+      this.socketIo.on('refreshConnections', function(event, data) {
         console.log(data);
       });
 
@@ -12264,8 +12264,6 @@ Application.Utils = Application.Utils || {};
     this.socket.emit('newUser', {
       id: this.sessionId
     });
-
-    this.emitter.trigger('newUser', this.sessionId);
   };
 
   Application.Utils.socketIo.prototype.onSocketMessage = function(data) {
@@ -12273,7 +12271,6 @@ Application.Utils = Application.Utils || {};
   };
 
   Application.Utils.socketIo.prototype.onSocketRefreshConnections = function(data) {
-    // this.emitter.trigger('newMessage', data);
-    console.log(data);
+    this.emitter.trigger('refreshConnections', data);
   };
 } ());
