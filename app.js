@@ -3,6 +3,9 @@ var express = require('express'),
   server = require('http').createServer(app),
   io = require('socket.io').listen(server);
 
+/****************
+* Some other configs
+****************/
 app.configure(function() {
   app.set('views', __dirname + '/views');
   app.engine('html', require('ejs').renderFile);
@@ -14,13 +17,20 @@ app.get('/', function(req, res) {
   res.render('index.ejs');
 });
 
+// This array contains the connected users in the app
+var users = [];
+
+
+/****************
+* Socket.IO stuff
+****************/
 io.on('connection', function(socket) {
   socket.on('newMessage', function(data) {
     io.sockets.emit('incomingMessage', data);
   });
 
   socket.on('newUser', function(data) {
-    console.log(data);
+    console.log(socket.id);
   });
 
   socket.on('disconnect', function(data) {
@@ -29,4 +39,8 @@ io.on('connection', function(socket) {
   });
 });
 
+
+/****************
+* Starts server
+****************/
 server.listen(3333);
