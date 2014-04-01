@@ -22,7 +22,7 @@ Application.Views = Application.Views || {};
         text: data.text
       });
 
-      this.addOne(this.collection.models[this.collection.models.length - 1]);
+      this.addOne(_.last(this.collection.models));
     },
 
     addOne: function(model) {
