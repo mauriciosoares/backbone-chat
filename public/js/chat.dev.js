@@ -12260,6 +12260,7 @@ Application.Utils = Application.Utils || {};
 
   Application.Utils.socketIo.prototype.onSocketConnect = function(data) {
     this.sessionId = this.socket.socket.sessionid;
+    console.log(this.sessionId);
 
     this.socket.emit('newUser', {
       id: this.sessionId

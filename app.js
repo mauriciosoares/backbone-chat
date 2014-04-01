@@ -26,8 +26,6 @@ var users = [];
 * Socket.IO stuff
 ****************/
 io.on('connection', function(socket) {
-
-  console.log('teste----------------------------------------');
   socket.on('newMessage', function(data) {
     io.sockets.emit('incomingMessage', data);
   });
@@ -44,8 +42,11 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function(data) {
-    console.log('disconnect ----------------------------------------');
-    console.log(socket.id);
+    var userRemove = _.findWhere(users, {
+      id: socket.id
+    });
+
+    users.splice(_.indexOf(users, userRemove), 1);
   });
 });
 
