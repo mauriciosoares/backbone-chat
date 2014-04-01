@@ -25,12 +25,21 @@ var users = [];
 * Socket.IO stuff
 ****************/
 io.on('connection', function(socket) {
+
+  console.log('teste----------------------------------------');
   socket.on('newMessage', function(data) {
     io.sockets.emit('incomingMessage', data);
   });
 
   socket.on('newUser', function(data) {
-    console.log(socket.id);
+    users.push({
+      id: socket.id,
+      name: ''
+    });
+
+    io.sockets.emit('refreshConnections', {
+      users: users
+    });
   });
 
   socket.on('disconnect', function(data) {

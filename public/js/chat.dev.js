@@ -12254,6 +12254,8 @@ Application.Utils = Application.Utils || {};
     this.socket.on('incomingMessage', $.proxy(this, 'onSocketMessage'));
 
     this.socket.on('connect', $.proxy(this, 'onSocketConnect'));
+
+    this.socket.on('refreshConnections', $.proxy(this, 'onSocketRefreshConnections'));
   };
 
   Application.Utils.socketIo.prototype.onSocketConnect = function(data) {
@@ -12268,5 +12270,10 @@ Application.Utils = Application.Utils || {};
 
   Application.Utils.socketIo.prototype.onSocketMessage = function(data) {
     this.emitter.trigger('newMessage', data);
+  };
+
+  Application.Utils.socketIo.prototype.onSocketRefreshConnections = function(data) {
+    // this.emitter.trigger('newMessage', data);
+    console.log(data);
   };
 } ());
