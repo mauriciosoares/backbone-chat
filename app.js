@@ -1,7 +1,8 @@
 var express = require('express'),
   app = express(),
   server = require('http').createServer(app),
-  io = require('socket.io').listen(server);
+  io = require('socket.io').listen(server),
+  _ = require('underscore');
 
 /****************
 * Some other configs
