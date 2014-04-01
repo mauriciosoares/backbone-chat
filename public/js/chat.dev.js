@@ -12096,6 +12096,7 @@ Application.Models = Application.Models || {};
     }
   });
 } ());
+
 Application.Collections = Application.Collections || {};
 
 (function() {
@@ -12116,17 +12117,17 @@ Application.Views = Application.Views || {};
     el: '#chat',
 
     initialize: function() {
+      // gets socketIo instance
       this.socketIo = new Application.Utils.SocketIo();
-      this.users = new Application.Views.Users({
-        socketIo: this.socketIo
-      });
+
       // starts messages functionalities
       new Application.Views.Messages({
         socketIo: this.socketIo
       });
 
-        this.socketIo.on('refreshConnections', function(event, data) {
-        console.log(data);
+      // starts view of users
+      this.users = new Application.Views.Users({
+        socketIo: this.socketIo
       });
     }
   });
@@ -12236,14 +12237,23 @@ Application.Views = Application.Views || {};
 Application.Views = Application.Views || {};
 
 (function() {
+  'use strict';
+
   Application.Views.Users = Backbone.View.extend({
     el: '#chat-users',
 
-    initialize: function() {
-      console.log('teste');
+    initialize: function(props) {
+      this.socketIo = props.socketIo;
+
+      this.socketIo.on('refreshConnections', $.proxy(this, 'render'));
+    },
+
+    render: function(event, data) {
+
     }
   });
 } ());
+
 Application.Utils = Application.Utils || {};
 
 (function() {
