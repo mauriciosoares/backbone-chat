@@ -12097,6 +12097,16 @@ Application.Models = Application.Models || {};
   });
 } ());
 
+Application.Models = Application.Models || {};
+
+(function() {
+  'use strict';
+
+  Application.Models.User = Backbone.Model.extend({
+
+  });
+} ());
+
 Application.Collections = Application.Collections || {};
 
 (function() {
