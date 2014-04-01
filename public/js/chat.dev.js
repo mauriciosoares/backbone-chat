@@ -12249,6 +12249,26 @@ Application.Views = Application.Views || {};
 (function() {
   'use strict';
 
+  Application.Views.User = Backbone.View.extend({
+    tagName: 'div',
+
+    template: Application.Helpers.template('#user-template'),
+
+    initialize: function() {
+
+    },
+
+    render: function() {
+      console.log(this.model);
+    }
+  });
+} ());
+
+Application.Views = Application.Views || {};
+
+(function() {
+  'use strict';
+
   Application.Views.Users = Backbone.View.extend({
     el: '#chat-users',
 
@@ -12259,7 +12279,12 @@ Application.Views = Application.Views || {};
     },
 
     render: function(event, data) {
+      _.forEach(data.users, function(user) {
+        var newUser = new Application.Views.User({
+          model: user
+        }).render();
 
+      }, this);
     }
   });
 } ());

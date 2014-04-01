@@ -13,7 +13,12 @@ Application.Views = Application.Views || {};
     },
 
     render: function(event, data) {
+      _.forEach(data.users, function(user) {
+        var newUser = new Application.Views.User({
+          model: user
+        }).render();
 
+      }, this);
     }
   });
 } ());
