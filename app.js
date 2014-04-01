@@ -25,7 +25,7 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function(data) {
     console.log('disconnect ----------------------------------------');
-    console.log(data);
+    console.log(socket.id);
   });
 });
 
