@@ -47,6 +47,10 @@ io.on('connection', function(socket) {
     });
 
     users.splice(_.indexOf(users, userRemove), 1);
+
+    io.sockets.emit('refreshConnections', {
+      users: users
+    });
   });
 });
 
