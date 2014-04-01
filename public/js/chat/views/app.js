@@ -8,13 +8,16 @@ Application.Views = Application.Views || {};
 
     initialize: function() {
       this.socketIo = new Application.Utils.SocketIo();
-      this.socketIo.on('refreshConnections', function(event, data) {
-        console.log(data);
+      this.users = new Application.Views.Users({
+        socketIo: this.socketIo
       });
-
       // starts messages functionalities
       new Application.Views.Messages({
         socketIo: this.socketIo
+      });
+
+        this.socketIo.on('refreshConnections', function(event, data) {
+        console.log(data);
       });
     }
   });

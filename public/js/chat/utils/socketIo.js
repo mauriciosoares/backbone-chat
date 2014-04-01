@@ -28,7 +28,6 @@ Application.Utils = Application.Utils || {};
 
   Application.Utils.SocketIo.prototype.onSocketConnect = function(data) {
     this.sessionId = this.socket.socket.sessionid;
-    console.log(this.sessionId);
 
     this.socket.emit('newUser', {
       id: this.sessionId

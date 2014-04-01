@@ -12117,13 +12117,16 @@ Application.Views = Application.Views || {};
 
     initialize: function() {
       this.socketIo = new Application.Utils.SocketIo();
-      this.socketIo.on('refreshConnections', function(event, data) {
-        console.log(data);
+      this.users = new Application.Views.Users({
+        socketIo: this.socketIo
       });
-
       // starts messages functionalities
       new Application.Views.Messages({
         socketIo: this.socketIo
+      });
+
+        this.socketIo.on('refreshConnections', function(event, data) {
+        console.log(data);
       });
     }
   });
@@ -12230,6 +12233,17 @@ Application.Views = Application.Views || {};
   });
 } ());
 
+Application.Views = Application.Views || {};
+
+(function() {
+  Application.Views.Users = Backbone.View.extend({
+    el: '#chat-users',
+
+    initialize: function() {
+      console.log('teste');
+    }
+  });
+} ());
 Application.Utils = Application.Utils || {};
 
 (function() {
@@ -12260,7 +12274,6 @@ Application.Utils = Application.Utils || {};
 
   Application.Utils.SocketIo.prototype.onSocketConnect = function(data) {
     this.sessionId = this.socket.socket.sessionid;
-    console.log(this.sessionId);
 
     this.socket.emit('newUser', {
       id: this.sessionId
