@@ -7,8 +7,12 @@ Application.Views = Application.Views || {};
     el: '#chat',
 
     initialize: function() {
+      this.socketIo = new Application.Utils.socketIo();
+
       // starts messages functionalities
-      new Application.Views.Messages();
+      new Application.Views.Messages({
+        socketIo: this.socketIo
+      });
     }
   });
 } ());

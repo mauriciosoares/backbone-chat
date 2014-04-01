@@ -12,8 +12,8 @@ Application.Views = Application.Views || {};
       'keyup': 'sendMessage'
     },
 
-    initialize: function() {
-      this.socketIo = new Application.Utils.socketIo();
+    initialize: function(props) {
+      this.socketIo = props.socketIo;
     },
 
     sendMessage: function(event) {

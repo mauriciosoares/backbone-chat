@@ -20,6 +20,16 @@ Application.Utils = Application.Utils || {};
 
   Application.Utils.socketIo.prototype.addSocketListeners = function() {
     this.socket.on('incomingMessage', $.proxy(this, 'onSocketMessage'));
+
+    this.socket.on('connect', $.proxy(this, 'onSocketConnect'));
+  };
+
+  Application.Utils.socketIo.prototype.onSocketConnect = function(data) {
+    this.sessionId = this.socket.socket.sessionid;
+
+    this.socket.emit('newUser', {
+      id: this.sessionId
+    });
   };
 
   Application.Utils.socketIo.prototype.onSocketMessage = function(data) {

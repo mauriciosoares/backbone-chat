@@ -12116,8 +12116,12 @@ Application.Views = Application.Views || {};
     el: '#chat',
 
     initialize: function() {
+      this.socketIo = new Application.Utils.socketIo();
+
       // starts messages functionalities
-      new Application.Views.Messages();
+      new Application.Views.Messages({
+        socketIo: this.socketIo
+      });
     }
   });
 } ());
@@ -12136,8 +12140,8 @@ Application.Views = Application.Views || {};
       'keyup': 'sendMessage'
     },
 
-    initialize: function() {
-      this.socketIo = new Application.Utils.socketIo();
+    initialize: function(props) {
+      this.socketIo = props.socketIo;
     },
 
     sendMessage: function(event) {
@@ -12194,12 +12198,14 @@ Application.Views = Application.Views || {};
 
     collection: Application.Collections.messages,
 
-    initialize: function() {
+    initialize: function(props) {
       // starts input for sending messages
-      new Application.Views.ChatInput();
+      new Application.Views.ChatInput({
+        socketIo: props.socketIo
+      });
 
       // starts socket.io listeners and stuff
-      this.socketIo = new Application.Utils.socketIo();
+      this.socketIo = props.socketIo;
       this.socketIo.on('newMessage', this.addMessage.bind(this));
     },
 
@@ -12243,6 +12249,16 @@ Application.Utils = Application.Utils || {};
 
   Application.Utils.socketIo.prototype.addSocketListeners = function() {
     this.socket.on('incomingMessage', $.proxy(this, 'onSocketMessage'));
+
+    this.socket.on('connect', $.proxy(this, 'onSocketConnect'));
+  };
+
+  Application.Utils.socketIo.prototype.onSocketConnect = function(data) {
+    this.sessionId = this.socket.socket.sessionid;
+
+    this.socket.emit('newUser', {
+      id: this.sessionId
+    });
   };
 
   Application.Utils.socketIo.prototype.onSocketMessage = function(data) {

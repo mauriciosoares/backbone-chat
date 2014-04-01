@@ -8,12 +8,14 @@ Application.Views = Application.Views || {};
 
     collection: Application.Collections.messages,
 
-    initialize: function() {
+    initialize: function(props) {
       // starts input for sending messages
-      new Application.Views.ChatInput();
+      new Application.Views.ChatInput({
+        socketIo: props.socketIo
+      });
 
       // starts socket.io listeners and stuff
-      this.socketIo = new Application.Utils.socketIo();
+      this.socketIo = props.socketIo;
       this.socketIo.on('newMessage', this.addMessage.bind(this));
     },
 

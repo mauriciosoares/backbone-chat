@@ -18,6 +18,15 @@ io.on('connection', function(socket) {
   socket.on('newMessage', function(data) {
     io.sockets.emit('incomingMessage', data);
   });
+
+  socket.on('newUser', function(data) {
+    console.log(data);
+  });
+
+  socket.on('disconnect', function(data) {
+    console.log('disconnect ----------------------------------------');
+    console.log(data);
+  });
 });
 
 server.listen(3333);
