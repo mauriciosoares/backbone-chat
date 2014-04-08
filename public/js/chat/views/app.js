@@ -20,7 +20,9 @@ Application.Views = Application.Views || {};
         socketIo: this.socketIo
       });
 
-      this.username = new Application.Views.UsernameInput();
+      this.username = new Application.Views.UsernameInput({
+        socketIo: this.socketIo
+      });
     }
   });
 } ());

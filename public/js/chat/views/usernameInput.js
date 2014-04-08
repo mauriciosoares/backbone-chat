@@ -6,6 +6,10 @@ Application.Views = Application.Views || {};
 	Application.Views.UsernameInput = Backbone.View.extend({
 		el: '#username-input',
 
+		initialize: function(props) {
+			this.socketIo = props.socketIo;
+		},
+
 		events: {
 			'keyup': 'updateName'
 		},
@@ -21,7 +25,9 @@ Application.Views = Application.Views || {};
 				return;
 			}
 
-			console.log(newUsername);
+			this.socketIo.socket.emit('newUsername', {
+				name: newUsername
+			});
 		}
 	});
 } ());

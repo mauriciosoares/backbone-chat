@@ -52,6 +52,18 @@ io.on('connection', function(socket) {
       users: users
     });
   });
+
+  socket.on('newUsername', function(data) {
+    var userUpdate = _.findWhere(users, {
+      id: socket.id
+    });
+
+    userUpdate.name = data.name;
+
+    io.sockets.emit('refreshConnections', {
+      users: users
+    });
+  });
 });
 
 
