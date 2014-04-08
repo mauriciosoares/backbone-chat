@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Backbone Chat</title>
+  <style>
+    .user {
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
   <div id="chat">
@@ -22,7 +27,11 @@
   </script>
 
   <script type="text/template" id="user-template">
-    <span>
+    <span class="user">
+      {{ if(name) { }}
+        {{name}}
+      {{ } }}
+      <br>
       ID: {{id}}
     </span>
   </script>
